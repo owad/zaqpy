@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  ui:
+  zaqpy:
     build:
       context: .
       dockerfile: Dockerfile
-    image: zaqpy-ui:${dockerTag:-latest}
+    image: zaqpy:${dockerTag:-latest}

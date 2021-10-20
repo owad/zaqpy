@@ -7,6 +7,8 @@ import React from 'react'
 
 import {Checkbox, Divider, Header, Icon, Image, Input, Item, List, Segment} from 'semantic-ui-react'
 
+import * as sqlite3 from 'sqlite3'
+
 type Item = {
   id: number;
   label: string;
@@ -23,6 +25,28 @@ type Event = {
 
 // This function gets called at build time
 export async function getStaticProps() {
+  const db = new sqlite3.Database("test.db")
+  const item: Item = {id: 1, checked: false, label: "Bla"}
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS items
+    (
+        id INT NOT NULL PRIMARY KEY,
+        checked BOOLEAN NOT NULL DEFAULT FALSE,
+        label TEXT NOT NULL DEFAULT ''
+    )`,
+    function() {
+      console.log("Boom");
+    }
+  );
+
+  db.run('INSERT INTO items VALUES ($item)', {
+      $item: item
+    }, function() {
+      console.log("BOOM");
+    }
+  );
+
   // Call an external API endpoint to get posts
   // const res = await fetch('https://.../posts')
   // const posts = await res.json()
@@ -36,11 +60,11 @@ export async function getStaticProps() {
   // }
 
   const items = [
-    {id: 1, checked: false, label: "Bla"},
-    {id: 2, checked: false, label: "Bla 1"},
-    {id: 3, checked: false, label: "Bla 2"},
-    {id: 4, checked: true, label: "Picked 1"},
-    {id: 5, checked: true, label: "Picked 2"},
+    {id: 1, checked: false, label: "Chleb"},
+    // {id: 2, checked: false, label: "Bla 1"},
+    // {id: 3, checked: false, label: "Bla 2"},
+    // {id: 4, checked: true, label: "Picked 1"},
+    // {id: 5, checked: true, label: "Picked 2"},
   ];
 
   return {
@@ -113,7 +137,7 @@ const Home: NextPage = ({ initTtems }) => {
               ))}
               <List.Item key="plus">
                 <Icon name="plus" />
-                <Input transparent placeholder="new item..." onKeyDown={e => handleAddItem(e)} />
+                <Input transparent placeholder="new item..." onKeyDown={(e: Event) => handleAddItem(e)} />
               </List.Item>
               <Divider />
               {items.filter((item: Item) => item.checked).map((item: Item) => (
