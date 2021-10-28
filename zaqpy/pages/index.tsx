@@ -61,6 +61,8 @@ export async function getStaticProps() {
 
   const items = [
     {id: 1, checked: false, label: "Chleb"},
+    {id: 2, checked: false, label: "Mleko"},
+    {id: 3, checked: false, label: "Jajka"},
     // {id: 2, checked: false, label: "Bla 1"},
     // {id: 3, checked: false, label: "Bla 2"},
     // {id: 4, checked: true, label: "Picked 1"},
@@ -77,6 +79,7 @@ export async function getStaticProps() {
 // @ts-ignore
 const Home: NextPage = ({ initTtems }) => {
   const [items, setItems] = useState(initTtems)
+
   function handleCheckbox(clickedItem: Item) {
     const updatedItems = items.map((item: Item) => {
       if (item.id === clickedItem.id) {
@@ -110,7 +113,7 @@ const Home: NextPage = ({ initTtems }) => {
     if (e.key === 'Enter') {
       setItems([
         ...items,
-        {id: items.length, checked: false, label: e.target.value}
+        {id: items.length + 1, checked: false, label: e.target.value}
       ])
       e.target.value = "";
     }
@@ -136,8 +139,8 @@ const Home: NextPage = ({ initTtems }) => {
                 </List.Item>
               ))}
               <List.Item key="plus">
-                <Icon name="plus" />
-                <Input transparent placeholder="new item..." onKeyDown={(e: Event) => handleAddItem(e)} />
+                {/*<Icon name="plus" />*/}
+                <Input icon="plus" iconPosition="left" transparent placeholder="new item..." onKeyDown={(e: Event) => handleAddItem(e)} />
               </List.Item>
               <Divider />
               {items.filter((item: Item) => item.checked).map((item: Item) => (
