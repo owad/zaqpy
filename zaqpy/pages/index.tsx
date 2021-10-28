@@ -63,22 +63,18 @@ export async function getStaticProps() {
     {id: 1, checked: false, label: "Chleb"},
     {id: 2, checked: false, label: "Mleko"},
     {id: 3, checked: false, label: "Jajka"},
-    // {id: 2, checked: false, label: "Bla 1"},
-    // {id: 3, checked: false, label: "Bla 2"},
-    // {id: 4, checked: true, label: "Picked 1"},
-    // {id: 5, checked: true, label: "Picked 2"},
   ];
 
   return {
     props: {
-      initTtems: items
+      initItems: items
     }
   }
 }
 
 // @ts-ignore
-const Home: NextPage = ({ initTtems }) => {
-  const [items, setItems] = useState(initTtems)
+const Home: NextPage = ({ initItems }) => {
+  const [items, setItems] = useState(initItems)
 
   function handleCheckbox(clickedItem: Item) {
     const updatedItems = items.map((item: Item) => {
@@ -139,7 +135,6 @@ const Home: NextPage = ({ initTtems }) => {
                 </List.Item>
               ))}
               <List.Item key="plus">
-                {/*<Icon name="plus" />*/}
                 <Input icon="plus" iconPosition="left" transparent placeholder="new item..." onKeyDown={(e: Event) => handleAddItem(e)} />
               </List.Item>
               <Divider />
@@ -152,60 +147,7 @@ const Home: NextPage = ({ initTtems }) => {
             </List>
           </Segment>
         </Segment.Group>
-
-        {/*<h1 className={styles.title}>*/}
-        {/*  Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
-        {/*  </h1>*/}
-
-        {/*<p className={styles.description}>*/}
-        {/*  Get started by editing{' '}*/}
-        {/*  <code className={styles.code}>pages/index.js</code>*/}
-        {/*</p>*/}
-
-        {/*<div className={styles.grid}>*/}
-        {/*  <a href="https://nextjs.org/docs" className={styles.card}>*/}
-        {/*    <h2>Documentation &rarr;</h2>*/}
-        {/*    <p>Find in-depth information about Next.js features and API.</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a href="https://nextjs.org/learn" className={styles.card}>*/}
-        {/*    <h2>Learn &rarr;</h2>*/}
-        {/*    <p>Learn about Next.js in an interactive course with quizzes!</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a*/}
-        {/*    href="https://github.com/vercel/next.js/tree/master/examples"*/}
-        {/*    className={styles.card}*/}
-        {/*  >*/}
-        {/*    <h2>Examples &rarr;</h2>*/}
-        {/*    <p>Discover and deploy boilerplate example Next.js projects.</p>*/}
-        {/*  </a>*/}
-
-        {/*  <a*/}
-        {/*    href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"*/}
-        {/*    className={styles.card}*/}
-        {/*  >*/}
-        {/*    <h2>Deploy &rarr;</h2>*/}
-        {/*    <p>*/}
-        {/*      Instantly deploy your Next.js site to a public URL with Vercel.*/}
-        {/*    </p>*/}
-        {/*  </a>*/}
-        {/*</div>*/}
-
       </main>
-
-      <footer className={styles.footer}>
-        {/*<a*/}
-        {/*  href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"*/}
-        {/*  target="_blank"*/}
-        {/*  rel="noopener noreferrer"*/}
-        {/*>*/}
-        {/*  Powered by{' '}*/}
-        {/*  <span className={styles.logo}>*/}
-        {/*    <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />*/}
-        {/*  </span>*/}
-        {/*</a>*/}
-      </footer>
     </div>
   )
 }
